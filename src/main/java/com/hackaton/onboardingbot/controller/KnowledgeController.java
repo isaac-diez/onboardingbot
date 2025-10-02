@@ -1,4 +1,4 @@
 package com.hackaton.onboardingbot.controller;
 
-public class knowledgeController {
+public class KnowledgeController {
 }

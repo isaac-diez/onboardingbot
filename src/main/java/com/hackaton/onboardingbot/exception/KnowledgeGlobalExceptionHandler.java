@@ -1,4 +1,4 @@
 package com.hackaton.onboardingbot.exception;
 
-public class knowledgeGlobalExceptionHandler {
+public class KnowledgeGlobalExceptionHandler {
 }

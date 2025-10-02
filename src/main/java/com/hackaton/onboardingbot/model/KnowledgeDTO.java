@@ -1,4 +1,4 @@
 package com.hackaton.onboardingbot.model;
 
-public class knowledgeDTO {
+public class KnowledgeDTO {
 }
