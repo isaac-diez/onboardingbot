@@ -1,0 +1,37 @@
+[
+  {
+    "question": "Com puc sol·licitar les vacances?",
+    "answer": "Has d'accedir al Portal de l'Empleat, anar a la secció 'Absències' i seleccionar els dies que vols. El teu manager rebrà una notificació per aprovar-les.",
+    "keyword": "vacances"
+  },
+  {
+    "question": "Quan es cobra la nòmina?",
+    "answer": "La nòmina s'ingressa l'últim dia hàbil de cada mes al compte bancari que vas proporcionar a RRHH.",
+    "keyword": "nomina"
+  },
+  {
+    "question": "Tinc problemes amb l'ordinador, a qui he de contactar?",
+    "answer": "Per a qualsevol incidència tècnica, has d'obrir un tiquet al nostre portal de suport de IT: support.empresa.com. L'equip de sistemes et contactarà el més aviat possible.",
+    "keyword": "ordinador"
+  },
+  {
+    "question": "Quin és l'horari de treball estàndard?",
+    "answer": "L'horari estàndard és de 9:00h a 18:00h, amb una hora per dinar. Tenim flexibilitat horària d'entrada i sortida, consulta-ho amb el teu responsable directe.",
+    "keyword": "horari de treball"
+  },
+  {
+    "question": "On puc trobar informació sobre els beneficis socials de l'empresa?",
+    "answer": "Tota la informació sobre beneficis com l'assegurança mèdica, tiquets restaurant i descomptes de gimnàs es troba a la Intranet, a la secció 'Persones i Cultura'.",
+    "keyword": "beneficis"
+  },
+  {
+    "question": "Com funciona el teletreball?",
+    "answer": "La nostra política de teletreball és híbrida. Pots treballar des de casa fins a 3 dies a la setmana, coordinant-ho sempre amb el teu equip per assegurar la cobertura necessària.",
+    "keyword": "teletreball"
+  },
+  {
+    "question": "Necessito material d'oficina, com el demano?",
+    "answer": "Pots demanar el material que necessitis a través del canal #office-supplies de Slack. L'equip de 'Office Management' s'encarregarà de proporcionar-t'ho.",
+    "keyword": "oficina"
+  }
+]
