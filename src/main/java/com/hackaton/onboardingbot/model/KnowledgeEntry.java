@@ -26,4 +26,9 @@ public class KnowledgeEntry {
     @Column(name = "keyword")
     private String keyword;
 
+    public KnowledgeEntry(String question, String answer, String keyword) {
+        this.question = question;
+        this.answer = answer;
+        this.keyword = keyword;
+    }
 }
