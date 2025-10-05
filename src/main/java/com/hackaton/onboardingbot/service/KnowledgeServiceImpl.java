@@ -7,10 +7,13 @@ import com.hackaton.onboardingbot.model.KnowledgeMapper;
 import com.hackaton.onboardingbot.repository.KnowledgeRepo;
 import org.springframework.stereotype.Service;
 
+import java.text.Normalizer;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class KnowledgeServiceImpl implements KnowledgeService{
+public class KnowledgeServiceImpl implements KnowledgeService {
 
     private KnowledgeRepo knowledgeRepo;
     private KnowledgeMapper mapper;
@@ -32,5 +35,42 @@ public class KnowledgeServiceImpl implements KnowledgeService{
     public KnowledgeEntry createKnowledgeEntry(KnowledgeCreateDTO queryDTO) {
         KnowledgeEntry query = mapper.toQuery(queryDTO);
         return knowledgeRepo.save(query);
+    }
+
+    @Override
+    public List<KnowledgeDTO> searchByQuestionKeywords(String userQuestion) {
+        if (userQuestion == null || userQuestion.isBlank()) {
+            return List.of();
+        }
+
+        String normalizedQuestion = normalizeAndCleanText(userQuestion);
+
+        String[] words = normalizedQuestion.split("\\s+");
+
+        List<String> keywordsToSearch = Arrays.stream(words)
+                .filter(word -> !word.isEmpty())
+                .toList();
+
+        if (keywordsToSearch.isEmpty()) {
+            return List.of();
+        }
+
+        List<KnowledgeEntry> foundEntries = knowledgeRepo.findByKeywordIn(keywordsToSearch);
+
+        return foundEntries.stream()
+                .map(mapper::toDto)
+                .toList();
+    }
+
+    private String normalizeAndCleanText(String text) {
+        String normalizedText = text.toLowerCase();
+
+        normalizedText = normalizedText.replace("'", " ");
+
+        normalizedText = Normalizer.normalize(normalizedText, Normalizer.Form.NFD);
+
+        normalizedText = normalizedText.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+
+        return normalizedText.replaceAll("[^a-z0-9\\s]", "");
     }
 }

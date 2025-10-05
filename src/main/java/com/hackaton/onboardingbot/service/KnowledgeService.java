@@ -10,6 +10,6 @@ public interface KnowledgeService {
 
     List<KnowledgeDTO> getAllEntries();
     KnowledgeEntry createKnowledgeEntry(KnowledgeCreateDTO newEntryDto);
-
+    List<KnowledgeDTO> searchByQuestionKeywords(String userQuestion);
 
 }
