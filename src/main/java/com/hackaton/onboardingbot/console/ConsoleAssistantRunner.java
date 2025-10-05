@@ -80,17 +80,20 @@ public class ConsoleAssistantRunner implements CommandLineRunner {
     }
 
     private void askQuestion(Scanner scanner) {
-//        System.out.print("\nEscriu la teva pregunta: ");
-//        String userQuestion = scanner.nextLine();
-//
-//        Optional<KnowledgeDTO> result = knowledgeService.searchByQuestion(userQuestion);
-//
-//        if (result.isPresent()) {
-//            System.out.println("\n💬 RESPOSTA TROBADA:");
-//            System.out.println(result.get().answer());
-//        } else {
-//            System.out.println("\n🚫 Ho sento, no he trobat cap resposta per a la teva pregunta.");
-//        }
+        System.out.print("\nEscriu la teva pregunta: ");
+        String userQuestion = scanner.nextLine();
+
+        List<KnowledgeDTO> results = knowledgeService.searchByQuestionKeywords(userQuestion);
+
+        if (!results.isEmpty()) {
+            System.out.println("\n💬 RESPOSTA(ES) TROBADA(ES):");
+            // Itera sobre tots els resultats i els mostra
+            results.forEach(entry ->
+                    System.out.printf("❓ PREGUNTA: %s\n💬 RESPOSTA: %s\n\n", entry.getQuestion(), entry.getAnswer())
+            );
+        } else {
+            System.out.println("\n🚫 Ho sento, no he trobat cap resposta per a la teva pregunta.");
+        }
     }
 
     private void createNewEntry(Scanner scanner) {
