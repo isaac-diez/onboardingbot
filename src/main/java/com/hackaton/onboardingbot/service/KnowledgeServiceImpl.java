@@ -1,5 +1,6 @@
 package com.hackaton.onboardingbot.service;
 
+import com.hackaton.onboardingbot.exception.InvalidRequestException;
 import com.hackaton.onboardingbot.model.KnowledgeCreateDTO;
 import com.hackaton.onboardingbot.model.KnowledgeDTO;
 import com.hackaton.onboardingbot.model.KnowledgeEntry;
@@ -33,6 +34,19 @@ public class KnowledgeServiceImpl implements KnowledgeService {
 
     @Override
     public KnowledgeEntry createKnowledgeEntry(KnowledgeCreateDTO queryDTO) {
+
+        if(queryDTO.getQuestion().isEmpty() || queryDTO.getQuestion()==null){
+            throw new InvalidRequestException("La pregunta no pot estar buida");
+        }
+
+        if(queryDTO.getAnswer().isEmpty() || queryDTO.getAnswer()==null){
+            throw new InvalidRequestException("La resposta no pot estar buida");
+        }
+
+        if(queryDTO.getKeyword().isEmpty() || queryDTO.getKeyword()==null){
+            throw new InvalidRequestException("La resposta no pot estar buida");
+        }
+
         KnowledgeEntry query = mapper.toQuery(queryDTO);
         return knowledgeRepo.save(query);
     }
