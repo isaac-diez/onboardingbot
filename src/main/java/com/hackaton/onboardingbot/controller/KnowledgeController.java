@@ -6,6 +6,7 @@ import com.hackaton.onboardingbot.model.KnowledgeEntry;
 import com.hackaton.onboardingbot.service.KnowledgeService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
@@ -116,9 +117,11 @@ public class KnowledgeController {
             }
     )
     @PostMapping("/knowledge")
-    public KnowledgeEntry create(@RequestBody KnowledgeCreateDTO queryDTO) {
+    public ResponseEntity<KnowledgeEntry> create(@RequestBody KnowledgeCreateDTO queryDTO) {
 
-        return knowledgeService.createKnowledgeEntry(queryDTO);
+        KnowledgeEntry createdEntry = knowledgeService.createKnowledgeEntry(queryDTO);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdEntry);
     }
 
 }
