@@ -88,11 +88,33 @@ class KnowledgeServiceImplTest {
 
     @Test
     void createKnowledgeEntry_shouldThrowException_whenQuestionIsEmpty() {
-        KnowledgeCreateDTO createDtoEmptyQuestion = new KnowledgeCreateDTO("", "", "");
+        KnowledgeCreateDTO createDtoEmptyQuestion = new KnowledgeCreateDTO("", "answer", "kw");
 
         assertThrows(InvalidRequestException.class, () -> {
             knowledgeService.createKnowledgeEntry(createDtoEmptyQuestion);
         }, "La pregunta no pot estar buida");
+
+        verify(knowledgeRepo, never()).save(any());
+    }
+
+    @Test
+    void createKnowledgeEntry_shouldThrowException_whenAnswerIsEmpty() {
+        KnowledgeCreateDTO createDtoEmptyQuestion = new KnowledgeCreateDTO("question", "", "kw");
+
+        assertThrows(InvalidRequestException.class, () -> {
+            knowledgeService.createKnowledgeEntry(createDtoEmptyQuestion);
+        }, "La resposta no pot estar buida");
+
+        verify(knowledgeRepo, never()).save(any());
+    }
+
+    @Test
+    void createKnowledgeEntry_shouldThrowException_whenkeywordIsEmpty() {
+        KnowledgeCreateDTO createDtoEmptyQuestion = new KnowledgeCreateDTO("question", "answer", "");
+
+        assertThrows(InvalidRequestException.class, () -> {
+            knowledgeService.createKnowledgeEntry(createDtoEmptyQuestion);
+        }, "La keyword no pot estar buida");
 
         verify(knowledgeRepo, never()).save(any());
     }
