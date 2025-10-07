@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class KnowledgeServiceImpl implements KnowledgeService {
@@ -44,7 +43,7 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         }
 
         if(queryDTO.getKeyword().isEmpty() || queryDTO.getKeyword()==null){
-            throw new InvalidRequestException("La resposta no pot estar buida");
+            throw new InvalidRequestException("La keyword no pot estar buida");
         }
 
         KnowledgeEntry query = mapper.toQuery(queryDTO);
