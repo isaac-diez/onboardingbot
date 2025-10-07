@@ -11,20 +11,6 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class KnowledgeGlobalExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> handleResourceNotFoundException(
-            ResourceNotFoundException ex, HttpServletRequest request) {
-
-        ApiErrorResponse errorResponse = new ApiErrorResponse(
-                LocalDateTime.now(),
-                HttpStatus.NOT_FOUND.value(),
-                "Not found",
-                ex.getMessage(),
-                request.getRequestURI()
-        );
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    }
-
     @ExceptionHandler(InvalidRequestException.class)
     public ResponseEntity<ApiErrorResponse> handleInvalidRequestException(
             InvalidRequestException ex, HttpServletRequest request) {
