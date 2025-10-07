@@ -101,7 +101,7 @@ class KnowledgeControllerTest {
         mockMvc.perform(post("/api/knowledge")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBodyJson))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.question").value(sampleEntry.getQuestion()));
     }
