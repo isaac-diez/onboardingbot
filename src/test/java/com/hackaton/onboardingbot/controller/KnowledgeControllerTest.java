@@ -1,7 +1,7 @@
 package com.hackaton.onboardingbot.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hackaton.onboardingbot.exception.ResourceNotFoundException;
+import com.hackaton.onboardingbot.exception.InvalidRequestException;
 import com.hackaton.onboardingbot.model.KnowledgeCreateDTO;
 import com.hackaton.onboardingbot.model.KnowledgeDTO;
 import com.hackaton.onboardingbot.model.KnowledgeEntry;
@@ -104,6 +104,25 @@ class KnowledgeControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.question").value(sampleEntry.getQuestion()));
+    }
+
+    @Test
+    void create_shouldReturn400AndErrorBody_whenInvalidRequestExceptionThrown() throws Exception {
+        String errorMessage = "La pregunta no pot estar buida";
+
+        when(knowledgeService.createKnowledgeEntry(any(KnowledgeCreateDTO.class)))
+                .thenThrow(new InvalidRequestException(errorMessage));
+
+        String requestBodyJson = objectMapper.writeValueAsString(new KnowledgeCreateDTO("Q", "A", "kw"));
+
+        mockMvc.perform(post("/api/knowledge")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBodyJson))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.message").value(errorMessage))
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.path").value("/api/knowledge"));
     }
 
 }
