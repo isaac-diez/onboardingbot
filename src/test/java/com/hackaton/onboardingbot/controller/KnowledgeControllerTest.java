@@ -72,8 +72,7 @@ class KnowledgeControllerTest {
         when(knowledgeService.searchByQuestionKeywords(any(String.class))).thenReturn(mockList);
 
         mockMvc.perform(get("/api/knowledge/question")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(question))
+                        .param("q",question))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].question").value(sampleDto.getQuestion()));
     }
@@ -85,8 +84,7 @@ class KnowledgeControllerTest {
         when(knowledgeService.searchByQuestionKeywords(any(String.class))).thenReturn(Collections.emptyList());
 
         mockMvc.perform(get("/api/knowledge/question")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(question))
+                        .param("q", question))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(content().string(""));
     }

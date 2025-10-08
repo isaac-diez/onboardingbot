@@ -58,7 +58,7 @@ public class KnowledgeController {
 
     @Operation(
             summary = "Fa la cerca d'una pregunta del client",
-            description = "Retorna una entrada o una llista d'entrades amb totes les que corresponen a una keyword.",
+            description = "Retorna una entrada o una llista d'entrades amb totes les que corresponen a una keyword trobada a la pregunta.",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -85,7 +85,7 @@ public class KnowledgeController {
             }
     )
     @GetMapping("/knowledge/question")
-    public ResponseEntity<List<KnowledgeDTO>> getEntryByQuestion(@RequestBody String question) {
+    public ResponseEntity<List<KnowledgeDTO>> getEntryByQuestion(@RequestParam("q") String question) {
         List<KnowledgeDTO> foundEntriesList = knowledgeService.searchByQuestionKeywords(question);
 
         if (foundEntriesList.isEmpty()) {
