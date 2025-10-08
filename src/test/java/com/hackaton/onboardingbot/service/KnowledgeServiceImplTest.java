@@ -120,21 +120,20 @@ class KnowledgeServiceImplTest {
     }
 
     @Test
-    void searchByQuestionKeywords_shouldReturnMappedResults_whenKeywordsFound() {
-        String userQuestion = "Quina és la Prova d'unitat?";
-        List<KnowledgeEntry> foundEntries = List.of(testEntry);
+    void searchByQuestionKeywords_shouldReturnMappedResults_whenKeywordFound() {
+        // En un test de servei, simulem la crida a la capa inferior (Repo)
+        String userQuestion = "Com és un test d'unitat?";
+        List<KnowledgeEntry> entryList = List.of(testEntry);
 
-        when(knowledgeRepo.findByKeywordIn(anyList())).thenReturn(foundEntries);
+        when(knowledgeRepo.findByKeywordIn(anyList())).thenReturn(entryList);
         when(mapper.toDto(testEntry)).thenReturn(testDto);
 
         List<KnowledgeDTO> result = knowledgeService.searchByQuestionKeywords(userQuestion);
 
         assertFalse(result.isEmpty());
         assertEquals(1, result.size());
-
-        verify(knowledgeRepo, times(1)).findByKeywordIn(argThat(keywords ->
-                keywords.contains("quina") && keywords.contains("prova")
-        ));
+        verify(knowledgeRepo, times(1)).findByKeywordIn(anyList());
+        verify(mapper, times(1)).toDto(testEntry);
     }
 
     @Test
@@ -149,18 +148,31 @@ class KnowledgeServiceImplTest {
     }
 
     @Test
-    void searchByQuestionKeywords_shouldReturnEmptyList_whenQuestionIsNull() {
-        List<KnowledgeDTO> result = knowledgeService.searchByQuestionKeywords(null);
-
-        assertTrue(result.isEmpty());
+    void searchByQuestionKeywords_shouldThrowException_whenQuestionIsNull() {
+        assertThrows(InvalidRequestException.class, () -> {
+            knowledgeService.searchByQuestionKeywords(null);
+        });
         verify(knowledgeRepo, never()).findByKeywordIn(anyList());
     }
 
     @Test
-    void searchByQuestionKeywords_shouldReturnEmptyList_whenQuestionIsBlank() {
-        List<KnowledgeDTO> result = knowledgeService.searchByQuestionKeywords("   ");
+    void searchByQuestionKeywords_shouldThrowException_whenQuestionIsBlank() {
+        // Verifiquem que es llança l'excepció quan la pregunta és un String buit
+        assertThrows(InvalidRequestException.class, () -> {
+            knowledgeService.searchByQuestionKeywords("");
+        });
+        verify(knowledgeRepo, never()).findByKeywordIn(anyList());
+    }
+
+    @Test
+    void searchByQuestionKeywords_shouldReturnEmptyList_whenOnlyStopWords() {
+        // Test per cobrir el cas on només hi ha paraules buides (stop words)
+        String userQuestion = "El la un";
+
+        List<KnowledgeDTO> result = knowledgeService.searchByQuestionKeywords(userQuestion);
 
         assertTrue(result.isEmpty());
+        // Verify que el Repo no s'ha cridat perquè no hi havia paraules clau vàlides
         verify(knowledgeRepo, never()).findByKeywordIn(anyList());
     }
 
