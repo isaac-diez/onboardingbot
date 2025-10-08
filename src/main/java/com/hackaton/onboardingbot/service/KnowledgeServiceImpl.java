@@ -53,7 +53,7 @@ public class KnowledgeServiceImpl implements KnowledgeService {
     @Override
     public List<KnowledgeDTO> searchByQuestionKeywords(String userQuestion) {
         if (userQuestion == null || userQuestion.isBlank()) {
-            return List.of();
+            throw  new InvalidRequestException("La pregunta no pot estar buida");
         }
 
         String normalizedQuestion = normalizeAndCleanText(userQuestion);
