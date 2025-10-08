@@ -92,7 +92,7 @@ public class ConsoleAssistantRunner implements CommandLineRunner {
                     System.out.printf("❓ PREGUNTA: %s\n💬 RESPOSTA: %s\n\n", entry.getQuestion(), entry.getAnswer())
             );
         } else {
-            System.out.println("\n🚫 Ho sento, no he trobat cap resposta per a la teva pregunta.");
+            System.out.println("\n🚫 Ho sento, no he trobat cap resposta per a la teva pregunta. Pots fer-ne una altra.");
         }
     }
 
