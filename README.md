@@ -1,5 +1,5 @@
-Assistent d'Onboarding (Chatbot Tècnic)
-=======================================
+Assistent Conversacional
+========================
 
 Descripció
 ----------
@@ -9,11 +9,11 @@ Aquest projecte és un assistent conversacional de consola dissenyat per respond
 Requisits Previs
 ----------------
 
-Per poder compilar i executar el projecte, necessites tenir instal-lat el següent software:
+Per poder compilar i executar el projecte, necessites tenir instal·lat el següent software:
 
 -   **Java Development Kit (JDK)**: Versió 21 o superior.
 
--   **Gradle**: El projecte inclou un Gradle Wrapper (`./gradlew`), per la qual cosa no necessites una instal-lació global de Gradle.
+-   **Gradle**: El projecte inclou un Gradle Wrapper (`./gradlew`), per la qual cosa no necessites una instal·lació global de Gradle.
 
 -   **Git**: Per clonar el repositori.
 

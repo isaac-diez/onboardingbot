@@ -8,7 +8,7 @@ El nucli funcional del bot es basa en una lògica de cerca flexible dissenyada p
 
 -   **Lògica de Cerca per Paraula Clau**: En lloc de buscar coincidències exactes de la pregunta, el sistema extreu les paraules clau rellevants.
 
-    1.  El text introduït per l'usuari es **normalitza**: es converteix a minúscules, s'eliminen els accents (`sol-licitut` -> `solicitut`) i els signes de puntuació. Els apòstrofs es tracten com a separadors (`d'oficina` -> `d oficina`).
+    1.  El text introduït per l'usuari es **normalitza**: es converteix a minúscules, s'eliminen els accents (`sol·licitut` -> `solicitut`) i els signes de puntuació. Els apòstrofs es tracten com a separadors (`d'oficina` -> `d oficina`).
 
     2.  El text netejat es divideix en paraules individuals.
 
@@ -21,7 +21,7 @@ El nucli funcional del bot es basa en una lògica de cerca flexible dissenyada p
 2\. Estructura de la Base de Coneixement
 ----------------------------------------
 
-La persistència de les dades es gestiona amb una base de dades en memòria **H2**, que s'inicialitza a l'arrancar l'aplicació a partir d'un fitxer `entries.json` situat a la carpeta de recursos.
+La persistència de les dades es gestiona amb una base de dades en memòria **H2**, que s'inicialitza en arrancar l'aplicació a partir d'un fitxer `entries.json` situat a la carpeta de recursos.
 
 #### Entitat `KnowledgeEntry`
 
@@ -39,7 +39,7 @@ Aquest disseny compleix amb el format pla requerit (`question`, `answer`) alhora
 
 S'ha optat per un disseny bassat en una **Arquitectura de N-Capes (Layered Architecture)** seguint el patró **Model-Vista-Controlador (MVC)**, que separa clarament les responsabilitats i promou un codi modular i mantenible.
 
--   **Capa de Interfície i Adaptadors (`Controller`)**: Responsable exclusivament de la interacció amb l'exterior. El `KnowledgeController` gestiona les peticions HTTP de l'API REST, mentre que el `ConsoleAssistantRunner` gestiona la línia de comandes. Aquesta capa treballa exclusivament amb **DTOs (Data Transfer Objects)** per adaptar el format de les dades externes al model intern de l'aplicació.
+-   **Capa d'Interfície i Adaptadors (`Controller`)**: Responsable exclusivament de la interacció amb l'exterior. El `KnowledgeController` gestiona les peticions HTTP de l'API REST, mentre que el `ConsoleAssistantRunner` gestiona la línia de comandes. Aquesta capa treballa exclusivament amb **DTOs (Data Transfer Objects)** per adaptar el format de les dades externes al model intern de l'aplicació.
 
 -   **Capa de Servei (`Service`)**: Conté tota la lògica de negoci. Orquestra les operacions de manera centralitzada, valida les dades i actua com a pont entre els controladors i la capa de dades. Tradueix DTOs a Entitats i viceversa. Llença les excepcions de negoci.
 
