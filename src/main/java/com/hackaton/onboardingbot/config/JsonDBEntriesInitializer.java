@@ -5,9 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hackaton.onboardingbot.model.KnowledgeEntry;
 import com.hackaton.onboardingbot.repository.KnowledgeRepo;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
@@ -15,6 +14,7 @@ import java.util.List;
 
 @Slf4j
 @Component
+@Order(1)
 public class JsonDBEntriesInitializer implements CommandLineRunner {
 
     private final KnowledgeRepo knowledgeRepo;

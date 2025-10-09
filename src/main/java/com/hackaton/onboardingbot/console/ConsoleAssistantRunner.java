@@ -6,12 +6,13 @@ import com.hackaton.onboardingbot.service.KnowledgeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
+@DependsOn("jsonDBEntriesInitializer")
 @Component
 public class ConsoleAssistantRunner implements CommandLineRunner {
 
@@ -87,7 +88,6 @@ public class ConsoleAssistantRunner implements CommandLineRunner {
 
         if (!results.isEmpty()) {
             System.out.println("\n💬 RESPOSTA(ES) TROBADA(ES):");
-            // Itera sobre tots els resultats i els mostra
             results.forEach(entry ->
                     System.out.printf("❓ PREGUNTA: %s\n💬 RESPOSTA: %s\n\n", entry.getQuestion(), entry.getAnswer())
             );
