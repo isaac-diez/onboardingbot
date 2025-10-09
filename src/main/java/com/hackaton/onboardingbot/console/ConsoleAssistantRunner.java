@@ -33,28 +33,36 @@ public class ConsoleAssistantRunner implements CommandLineRunner {
         try (Scanner scanner = new Scanner(System.in)) {
             boolean running = true;
             while (running) {
-                displayMenu();
-                System.out.print("Tria una opció: ");
-                String choice = scanner.nextLine();
+                try {
+                    displayMenu();
+                    System.out.print("Tria una opció: ");
+                    String choice = scanner.nextLine();
 
-                switch (choice) {
-                    case "1":
-                        listAllEntries();
-                        break;
-                    case "2":
-                        askQuestion(scanner);
-                        break;
-                    case "3":
-                        createNewEntry(scanner);
-                        break;
-                    case "4":
-                        running = false;
-                        break;
-                    default:
-                        System.out.println("❌ Opció no vàlida. Si us plau, tria un número de l'1 al 4.");
-                        break;
+                    switch (choice) {
+                        case "1":
+                            listAllEntries();
+                            break;
+                        case "2":
+                            askQuestion(scanner);
+                            break;
+                        case "3":
+                            createNewEntry(scanner);
+                            break;
+                        case "4":
+                            running = false;
+                            break;
+                        default:
+                            System.out.println("❌ Opció no vàlida. Si us plau, tria un número de l'1 al 4.");
+                            break;
+                    }
+                } catch (Exception ex) {
+                    log.error("Error inesperat durant l'execució de la consola.", ex);
+                    System.out.println("\n🛑 S'ha produït un error inesperat. Si us plau, torna a provar.");
                 }
             }
+        } catch (Exception criticalEx) {
+            log.error("Error crític en la inicialització o tancament de l'entrada de consola.", criticalEx);
+            System.out.println("\n🛑 Error fatal en l'entrada de consola. L'aplicació s'aturarà.");
         }
         System.out.println("👋 Gràcies per utilitzar l'assistent. Fins aviat!");
     }
