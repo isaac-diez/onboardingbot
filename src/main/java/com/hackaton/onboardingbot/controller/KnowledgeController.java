@@ -4,8 +4,6 @@ import com.hackaton.onboardingbot.model.KnowledgeCreateDTO;
 import com.hackaton.onboardingbot.model.KnowledgeDTO;
 import com.hackaton.onboardingbot.model.KnowledgeEntry;
 import com.hackaton.onboardingbot.service.KnowledgeService;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
