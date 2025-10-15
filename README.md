@@ -39,7 +39,7 @@ Instal-lació i Execució
 3.  **Executar l'aplicació:** Un cop compilat, es generarà un fitxer `.jar` a la carpeta `build/libs/`. Executa'l amb la següent comanda:
 
     ```
-    java -jar build/libs/chatbot-0.0.1-SNAPSHOT.jar
+    java -jar build/libs/OnboardingBot-0.0.1-SNAPSHOT
     ```
 
     Un cop executat, l'assistent de consola s'iniciarà automàticament.
